@@ -45,6 +45,7 @@ function drinkWater(thirst) {
 }
 //-------------------------------------------------------------
 
+//Whenever yo console.log the execution of a function, you are logging the return value of the function
 console.log(drinkWater(12))
 // => "Man I sure am thirsty"
 // => "Ahh that hits the spot"
@@ -118,12 +119,14 @@ function printNameAndPhones(users) {
   let keys = Object.keys(users)
 
   keys.forEach(function(key) {
-    if (typeof users[key] === "object") {
-      printNameAndPhones(users[key])
-    } else{
-      console.log(`${key}: `, users[key])
-    }
-  });
+    (typeof users[key] === "object") ? (printNameAndPhones(users[key])) : (console.log(`${key}: `, users[key]))
+    // if (typeof users[key] === "object") {
+    //   printNameAndPhones(users[key])
+    // } else{
+    //   console.log(`${key}: `, users[key])
+    // }
+    //Figured to use ternary operator to compact lines
+  })
 
   //So while overhearing the group discuss, I realized that users was an array instead of nessessarily an object
   //This still works though so I hope it is good?
@@ -163,7 +166,7 @@ function myMap(array, callback) {
 // ***** Callbacks - Question 1 *****
 
 //-------------------------------------------------------------
-triple = function(num) {
+let triple = function(num) {
   return num *= 3
 }
 //-------------------------------------------------------------
@@ -182,7 +185,7 @@ console.log("%c----------", "color: red")
 // ***** Callbacks - Question 2 *****
 
 //-------------------------------------------------------------
-greet = function(name) {
+let greet = function(name) {
   return `Hi, ${name}`
 }
 //-------------------------------------------------------------
@@ -219,7 +222,6 @@ const line = []
 ticketNumber = 1
 function takeATicketNumber(line) {
   line.push(ticketNumber)
-  //ticketNumber++
 
   return `Welcome. You are ticket number ${ticketNumber++}`
 }
@@ -252,13 +254,11 @@ console.log("%c----------", "color: red")
 function ticketNumberGeneratorFunc() {
   let ticketNumber = 1
 
-  function takeATicketNumber() {
-    newLine.push(ticketNumber)
-  
+  return function takeATicketNumber(line) {
+    line.push(ticketNumber)
+
     return `Welcome. You are ticket number ${ticketNumber++}`
   }
-
-  return takeATicketNumber(newLine)
 }
 //-------------------------------------------------------------
 
